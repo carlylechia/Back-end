@@ -20,7 +20,7 @@ app.set('view engine', 'ejs')
 
 db.connect()
 const server = app.listen(PORT, () => {
-  console.log(`>> Server Listening on Port ${PORT}...`);
+  console.log(`> Server Listening on Port ${PORT}...`);
   });
 
   const io = socket(server, {
@@ -34,6 +34,7 @@ global.onlineUsers = new Map();
 
 io.on('connection', (socket) => {
   global.chatSocket = socket;
+
   socket.on('add-user', (userId) => {
     onlineUsers.set(userId, socket.id);
   })
@@ -42,6 +43,9 @@ io.on('connection', (socket) => {
     if(sendUserSocket) {
       socket.to(sendUserSocket).emit('recieve-msg', data.message);
     }
+  })
+  socket.on('chat-cleared', callBack => {
+    callBack('Chat has been cleared!');
   })
 })
 

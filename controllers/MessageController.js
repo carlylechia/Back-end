@@ -37,3 +37,21 @@ module.exports.addMessage = async (req, res, next) => {
     next(ex);
   }
 };
+
+module.exports.clearChatMessages = async (req, res, next) => {
+  try {
+    const { from, to } = req.body;
+
+    await Messages.deleteMany({
+      users: {
+        $all: [from, to],
+      },
+    });
+    res.json({
+      status: true,
+      msg: 'This chat has been cleared, successfully.'
+    });
+  } catch (ex) {
+    next(ex);
+  }
+};
