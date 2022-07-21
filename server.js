@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const AuthRoute = require('./routes/auth');
 const UserRoute = require('./routes/users');
 const messageRoutes = require("./routes/message");
-// const AdminRoute = require('./routes/admin');
+const BoardRoute = require('./routes/boards');
 const RefreshToken = require('./routes/refresh')
 const path = require('path');
 const cors = require('cors');
@@ -69,4 +69,5 @@ app.use(morgan('dev'));
 app.use('/api', UserRoute);
 app.use('/api/auth', AuthRoute);
 app.use("/api/messages", messageRoutes);
+app.use("/api/boards", BoardRoute);
 app.use('/api/auth', RefreshToken);

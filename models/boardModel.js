@@ -16,11 +16,14 @@ const boardSchema = new Schema({
     required: true,
     ref: 'User'
   },
+  users: Array,
   // columns: {
   //   type: Schema.Types.ObjectId,
   //   ref: 'Column',
   //   required: true,
   // }
+}, {
+  timestamps: true,
 });
 
 boardSchema.virtual('columns', {
