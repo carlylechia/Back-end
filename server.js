@@ -6,6 +6,7 @@ const AuthRoute = require('./routes/auth');
 const UserRoute = require('./routes/users');
 const messageRoutes = require("./routes/message");
 const BoardRoute = require('./routes/boards');
+const ColumnRoute = require('./routes/columns');
 const RefreshToken = require('./routes/refresh')
 const path = require('path');
 const cors = require('cors');
@@ -70,4 +71,5 @@ app.use('/api', UserRoute);
 app.use('/api/auth', AuthRoute);
 app.use("/api/messages", messageRoutes);
 app.use("/api/boards", BoardRoute);
+app.use("/api/columns", ColumnRoute);
 app.use('/api/auth', RefreshToken);

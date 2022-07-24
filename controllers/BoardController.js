@@ -17,6 +17,16 @@ module.exports.getBoards = async (req, res, next) => {
   }
 };
 
+module.exports.getBoardData = async (req, res, next) => {
+  try {
+    const board = await Boards.findOne({_id: req.params.id }).select(["name", "code", "_id", "users"]);
+
+    res.json(board);
+  } catch (ex) {
+    next(ex);
+  }
+};
+
 module.exports.addBoard = async (req, res, next) => {
   try {
     const { name, creator } = req.body;
@@ -27,7 +37,7 @@ module.exports.addBoard = async (req, res, next) => {
       users: [creator],
     });
 
-    if (data) return res.json({ msg: "Board added successfully." });
+    if (data) return res.json(data);
     else return res.json({ msg: "Failed to add board to the database" });
   } catch (ex) {
     next(ex);
